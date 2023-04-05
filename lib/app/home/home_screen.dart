@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_ml_kit_demos/app/routes/app_routes.dart';
+
+import '../../common/constants/constants.dart';
+import '../routes/app_routes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,14 +15,16 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              /// text recognition
               ElevatedButton(
                 onPressed: () => Get.toNamed(Routes.routeTextRecognize),
-                child: const Text("Text Recognition"),
+                child: const Text(AppStrings.textRecognition),
               ).paddingSymmetric(vertical: 30),
 
+              /// barcode scanner
               ElevatedButton(
                 onPressed: () => Get.toNamed(Routes.routeBarcodeScanner),
-                child: const Text("Barcode Scanner"),
+                child: const Text(AppStrings.barcodeScanner),
               ),
             ],
           ),

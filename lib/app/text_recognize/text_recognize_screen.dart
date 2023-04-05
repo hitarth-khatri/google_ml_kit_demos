@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../common/constants/constants.dart';
 import 'text_recognize_controller.dart';
 
 class TextRecognizeScreen extends GetView<TextRecognizeController> {
@@ -25,18 +26,18 @@ class TextRecognizeScreen extends GetView<TextRecognizeController> {
                           child: Image.file(
                             controller.imageFile.value,
                             fit: BoxFit.fitHeight,
-                            height: 450,
-                            width: 350,
+                            height: AppSize.imgHeight,
+                            width: AppSize.imgWidth,
                           ),
                         )
-                      : const Text("Select Image"),
+                      : const Text(AppStrings.selectImg),
                 ),
 
                 /// detected text
                 Obx(
                   () => controller.detectedText.value != ""
                       ? ListTile(
-                          title: const Text("Detected Text"),
+                          title: const Text(AppStrings.detectedText),
                           subtitle: SelectableText(
                             controller.detectedText.value,
                           ),
@@ -51,13 +52,13 @@ class TextRecognizeScreen extends GetView<TextRecognizeController> {
         /// upload image button
         floatingActionButton: FloatingActionButton(
           onPressed: () => controller.selectImage(),
-          child: const Icon(Icons.photo),
+          child: AppIcons.photoIcon,
         ),
 
         /// recognize text button
         bottomNavigationBar: FilledButton(
           onPressed: () => controller.recognizeText(),
-          child: const Text("Recognize Text"),
+          child: const Text(AppStrings.recognizeText),
         ).paddingAll(10),
       ),
     );

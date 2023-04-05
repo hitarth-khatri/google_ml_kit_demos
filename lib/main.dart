@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
+import 'common/constants/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,12 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        listTileTheme: Theme.of(context).listTileTheme.copyWith(
-              tileColor: Colors.blueGrey[100],
-            ),
-      ),
+      theme: appThemeData(context: context),
       initialRoute: Routes.routeHome,
       getPages: AppPages.pages,
     );
