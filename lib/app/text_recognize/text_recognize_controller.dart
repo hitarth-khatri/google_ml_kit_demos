@@ -28,15 +28,22 @@ class TextRecognizeController extends GetxController {
 
   /// recognize text
   Future<void> recognizeText() async {
-    recognizedText = await textRecognizer.processImage(inputImage.value);
-    detectedText.value = recognizedText!.text;
-    if (recognizedText?.text == "") {
+    if (imgPath.value != "") {
+      recognizedText = await textRecognizer.processImage(inputImage.value);
+      detectedText.value = recognizedText!.text;
+      if (recognizedText?.text == "") {
+        Get.rawSnackbar(
+          title: "No Text Detected",
+          message: "Select another image",
+        );
+      }
+      print("recognizedText: ${recognizedText!.text}");
+    } else {
       Get.rawSnackbar(
-        title: "No Text Detected",
-        message: "Select another image",
+        title: "Please select image",
+        message: "Must select image to recognize text",
       );
     }
-    print("recognizedText: ${recognizedText!.text}");
   }
 
   /// select gallery image

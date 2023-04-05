@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BarcodeScannerScreen extends StatelessWidget {
+import '../../common/constants/constants.dart';
+import 'barcode_scanner_controller.dart';
+
+class BarcodeScannerScreen extends GetView<BarcodeScannerController> {
   const BarcodeScannerScreen({Key? key}) : super(key: key);
 
   @override
@@ -12,8 +15,23 @@ class BarcodeScannerScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-               Text("Barcode scanner"),
+              children: [
+                /// barcode image view
+                Obx(
+                  () => controller.imgPath.value != ""
+                      ? InteractiveViewer(
+                          panEnabled: false,
+                          minScale: 1,
+                          maxScale: 2,
+                          child: Image.file(
+                            controller.imageFile.value,
+                            fit: BoxFit.contain,
+                            height: AppSize.imgHeight,
+                            width: AppSize.imgWidth,
+                          ),
+                        )
+                      : const Text(AppStrings.selectImg),
+                ),
               ],
             ),
           ).paddingAll(8),
