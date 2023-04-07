@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../common/constants/constants.dart';
+import '../../common/widgets/common_widgets.dart';
 import 'barcode_scanner_controller.dart';
 import 'components/pick_barcode_button.dart';
 
@@ -13,6 +14,9 @@ class BarcodeScannerScreen extends GetView<BarcodeScannerController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CommonWidgets.appBar(
+          appBarTitle: AppStrings.barcodeScanner,
+        ),
         body: Center(
           child: SingleChildScrollView(
             child: Column(

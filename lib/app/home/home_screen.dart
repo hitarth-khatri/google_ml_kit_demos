@@ -19,13 +19,19 @@ class HomeScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => Get.toNamed(Routes.routeTextRecognize),
                 child: const Text(AppStrings.textRecognition),
-              ).paddingSymmetric(vertical: 30),
+              ).paddingSymmetric(vertical: 20),
 
               /// barcode scanner
               ElevatedButton(
                 onPressed: () => Get.toNamed(Routes.routeBarcodeScanner),
                 child: const Text(AppStrings.barcodeScanner),
-              ),
+              ).paddingSymmetric(vertical: 20),
+
+              /// face detection
+              ElevatedButton(
+                onPressed: () => Get.toNamed(Routes.routeFaceDetection),
+                child: const Text(AppStrings.faceDetection),
+              ).paddingSymmetric(vertical: 20),
             ],
           ),
         ),

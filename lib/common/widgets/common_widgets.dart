@@ -39,6 +39,13 @@ class CommonWidgets {
       label: const Text(AppStrings.fromGallery),
     );
   }
+
+  static AppBar appBar({required String appBarTitle}) {
+    return AppBar(
+      title: Text(appBarTitle),
+      centerTitle: true,
+    );
+  }
 }
 
 /// debug print

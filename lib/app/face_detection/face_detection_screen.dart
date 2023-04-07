@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_ml_kit_demos/app/text_recognize/components/pick_image_button.dart';
-import 'package:google_ml_kit_demos/common/widgets/common_widgets.dart';
 
 import '../../common/constants/constants.dart';
-import 'text_recognize_controller.dart';
+import '../../common/widgets/common_widgets.dart';
+import 'face_detection_controller.dart';
+import 'components/pick_face_detection_image_button.dart';
 
-class TextRecognizeScreen extends GetView<TextRecognizeController> {
-  const TextRecognizeScreen({Key? key}) : super(key: key);
+class FaceDetectionScreen extends GetView<FaceDetectionController> {
+  const FaceDetectionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: CommonWidgets.appBar(
-          appBarTitle: AppStrings.textRecognition,
+          appBarTitle: AppStrings.faceDetection,
         ),
         body: Center(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 /// image view
                 Obx(
@@ -30,7 +30,7 @@ class TextRecognizeScreen extends GetView<TextRecognizeController> {
                           maxScale: 2,
                           child: Image.file(
                             controller.imageFile.value,
-                            fit: BoxFit.fitHeight,
+                            fit: BoxFit.contain,
                             height: AppSize.imgHeight,
                             width: AppSize.imgWidth,
                           ),
@@ -38,13 +38,13 @@ class TextRecognizeScreen extends GetView<TextRecognizeController> {
                       : const Text(AppStrings.pickImage),
                 ),
 
-                /// detected text
+                /// face count
                 Obx(
-                  () => controller.detectedText.value != ""
+                  () => controller.faceCount.value != 0
                       ? ListTile(
-                          title: const Text(AppStrings.detectedText),
+                          title: const Text(AppStrings.faceCountString),
                           subtitle: SelectableText(
-                            controller.detectedText.value,
+                            controller.faceCount.value.toString(),
                           ),
                         ).paddingAll(8)
                       : Container(),
@@ -56,7 +56,7 @@ class TextRecognizeScreen extends GetView<TextRecognizeController> {
 
         /// process barcode button
         bottomNavigationBar: ElevatedButton(
-          onPressed: () => pickImage(),
+          onPressed: () => pickFaceImage(),
           child: const Text(AppStrings.pickImage),
         ).paddingSymmetric(horizontal: 10, vertical: 10),
       ),
