@@ -28,8 +28,53 @@ class TextRecognizeController extends GetxController {
   RecognizedText? recognizedText;
   RxString detectedText = "".obs;
 
+  /// select gallery image
+  Future<void> selectImage({
+    bool isCamera = false,
+  }) async {
+    PermissionStatus? status;
+
+    defaultTargetPlatform == TargetPlatform.iOS
+        ? status = await Permission.photos.request()
+        : status = await Permission.storage.request();
+
+    if (status.isGranted) {
+      print("Permission Granted");
+
+      galleryImage = await ImagePicker().pickImage(
+        source: isCamera ? ImageSource.camera : ImageSource.gallery,
+        maxWidth: 1800,
+        maxHeight: 1800,
+        imageQuality: 50,
+      );
+
+      if (galleryImage != null) {
+        detectedText.value = "";
+
+        imgPath.value = galleryImage!.path;
+
+        imageFile.value = File(imgPath.value);
+
+        recognizeText();
+      } else {
+        print("image null");
+      }
+    } else if (status.isPermanentlyDenied) {
+      print("Permission Denied");
+      Get.defaultDialog(
+        middleText: "Permission denied",
+        confirm: OutlinedButton(
+          onPressed: () => openAppSettings(),
+          child: const Text("open setting"),
+        ),
+      );
+    }
+  }
+
   /// recognize text
   Future<void> recognizeText() async {
+    inputImage.value = InputImage.fromFilePath(imgPath.value);
+
     if (imgPath.value != "") {
       recognizedText = await textRecognizer.processImage(inputImage.value);
       detectedText.value = recognizedText!.text;
@@ -44,47 +89,6 @@ class TextRecognizeController extends GetxController {
       Get.rawSnackbar(
         title: "Please select image",
         message: "Must select image to recognize text",
-      );
-    }
-  }
-
-  /// select gallery image
-  Future<void> selectImage() async {
-    PermissionStatus? status;
-
-    defaultTargetPlatform == TargetPlatform.iOS
-        ? status = await Permission.photos.request()
-        : status = await Permission.storage.request();
-
-    if (status.isGranted) {
-      print("Permission Granted");
-
-      galleryImage = await ImagePicker().pickImage(
-        source: ImageSource.gallery,
-        maxWidth: 1800,
-        maxHeight: 1800,
-        imageQuality: 50,
-      );
-
-      if (galleryImage != null) {
-        detectedText.value = "";
-
-        imgPath.value = galleryImage!.path;
-
-        imageFile.value = File(imgPath.value);
-
-        inputImage.value = InputImage.fromFilePath(imgPath.value);
-      } else {
-        print("image null");
-      }
-    } else if (status.isPermanentlyDenied) {
-      print("Permission Denied");
-      Get.defaultDialog(
-        middleText: "Permission denied",
-        confirm: OutlinedButton(
-          onPressed: () => openAppSettings(),
-          child: const Text("open setting"),
-        ),
       );
     }
   }

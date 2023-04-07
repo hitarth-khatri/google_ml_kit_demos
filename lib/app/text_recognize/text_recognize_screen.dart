@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_ml_kit_demos/app/text_recognize/components/pick_image_button.dart';
 
 import '../../common/constants/constants.dart';
 import 'text_recognize_controller.dart';
@@ -30,7 +31,7 @@ class TextRecognizeScreen extends GetView<TextRecognizeController> {
                             width: AppSize.imgWidth,
                           ),
                         )
-                      : const Text(AppStrings.selectImg),
+                      : const Text(AppStrings.pickImage),
                 ),
 
                 /// detected text
@@ -49,17 +50,11 @@ class TextRecognizeScreen extends GetView<TextRecognizeController> {
           ).paddingAll(8),
         ),
 
-        /// upload image button
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => controller.selectImage(),
-          child: AppIcons.galleryIcon,
-        ),
-
-        /// recognize text button
-        bottomNavigationBar: FilledButton(
-          onPressed: () => controller.recognizeText(),
-          child: const Text(AppStrings.recognizeText),
-        ).paddingAll(10),
+        /// process barcode button
+        bottomNavigationBar: ElevatedButton(
+          onPressed: () => pickImage(),
+          child: const Text(AppStrings.pickImage),
+        ).paddingSymmetric(horizontal: 10, vertical: 10),
       ),
     );
   }

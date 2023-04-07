@@ -21,6 +21,7 @@ ThemeData appThemeData({BuildContext? context}) {
       ),
     ),
 
+    /// elevated button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.yellow[200],

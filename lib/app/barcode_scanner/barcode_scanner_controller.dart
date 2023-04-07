@@ -21,7 +21,6 @@ class BarcodeScannerController extends GetxController {
   final Rx<Uri> barcodeUrl = Uri.parse("").obs;
   final RxString barcodeWifi = "".obs;
 
-
   /// select image
   Future<void> selectImage({
     bool isCamera = false,
@@ -49,7 +48,8 @@ class BarcodeScannerController extends GetxController {
 
         imageFile.value = File(imgPath.value);
 
-        processBarcode();
+        // process barcode
+        await processBarcode();
       } else {
         print("image null");
       }
