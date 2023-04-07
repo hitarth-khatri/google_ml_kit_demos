@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_ml_kit_demos/common/widgets/common_widgets.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -32,7 +33,7 @@ class BarcodeScannerController extends GetxController {
         : status = await Permission.storage.request();
 
     if (status.isGranted) {
-      print("Permission Granted");
+      commonPrint(value: "Permission Granted");
 
       galleryImage = await ImagePicker().pickImage(
         source: isCamera ? ImageSource.camera : ImageSource.gallery,
@@ -51,10 +52,10 @@ class BarcodeScannerController extends GetxController {
         // process barcode
         await processBarcode();
       } else {
-        print("image null");
+        commonPrint(value: "image null");
       }
     } else if (status.isPermanentlyDenied) {
-      print("Permission Denied");
+      commonPrint(value: "Permission Denied");
       Get.defaultDialog(
         middleText: "Permission denied",
         confirm: OutlinedButton(
@@ -74,27 +75,44 @@ class BarcodeScannerController extends GetxController {
     barcodeUrl.value = Uri.parse("");
     barcodeWifi.value = "";
 
-    for (Barcode barcode in barcodes) {
-      final BarcodeType barcodeType = barcode.type;
-      final String? displayValue = barcode.displayValue;
-      final String? rawValue = barcode.rawValue;
+    if (barcodes.isNotEmpty) {
+      for (Barcode barcode in barcodes) {
+        final BarcodeType barcodeType = barcode.type;
+        final String? displayValue = barcode.displayValue;
+        final String? rawValue = barcode.rawValue;
 
-      /// handle barcode type
-      switch (barcodeType) {
-        case BarcodeType.url:
-          barcodeUrl.value = Uri.parse("$rawValue");
-          print("displayValue: $displayValue , rawValue: $rawValue");
-          print("url barcode");
-          break;
-        case BarcodeType.wifi:
-          print("displayValue: $displayValue , rawValue: $rawValue");
-          barcodeWifi.value = displayValue!;
-          print("wifi barcode");
-          break;
-        default:
-          print("default barcoded");
-          break;
+        /// handle barcode type
+        switch (barcodeType) {
+          case BarcodeType.url:
+            commonPrint(
+              value:
+                  "url barcode -> displayValue: $displayValue , rawValue: $rawValue",
+            );
+            barcodeUrl.value = Uri.parse("$rawValue");
+            break;
+
+          case BarcodeType.wifi:
+            barcodeWifi.value = displayValue!;
+            commonPrint(
+              value:
+                  "wifi barcode -> displayValue: $displayValue , rawValue: $rawValue",
+            );
+            break;
+
+          default:
+            commonPrint(value: "default barcoded");
+            Get.rawSnackbar(
+              title: "No barcode detected",
+              message: "Pick another image",
+            );
+            break;
+        }
       }
+    } else {
+      Get.rawSnackbar(
+        title: "No barcode detected",
+        message: "Pick another image",
+      );
     }
   }
 
@@ -102,13 +120,13 @@ class BarcodeScannerController extends GetxController {
   Future<void> openUrl() async {
     try {
       await launchUrl(barcodeUrl.value, mode: LaunchMode.externalApplication);
-      print("url launched");
+      commonPrint(value: "url launched");
     } catch (e) {
       Get.rawSnackbar(
         title: "Unable to launch url",
         message: "Link is not valid",
       );
-      print(e);
+      commonPrint(value: "url launch catch: $e");
     }
   }
 }

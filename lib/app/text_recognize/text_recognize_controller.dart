@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_ml_kit_demos/common/widgets/common_widgets.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -39,7 +40,7 @@ class TextRecognizeController extends GetxController {
         : status = await Permission.storage.request();
 
     if (status.isGranted) {
-      print("Permission Granted");
+      commonPrint(value: "Permission Granted");
 
       galleryImage = await ImagePicker().pickImage(
         source: isCamera ? ImageSource.camera : ImageSource.gallery,
@@ -57,10 +58,10 @@ class TextRecognizeController extends GetxController {
 
         recognizeText();
       } else {
-        print("image null");
+        commonPrint(value: "image null");
       }
     } else if (status.isPermanentlyDenied) {
-      print("Permission Denied");
+      commonPrint(value: "Permission Denied");
       Get.defaultDialog(
         middleText: "Permission denied",
         confirm: OutlinedButton(
@@ -84,7 +85,7 @@ class TextRecognizeController extends GetxController {
           message: "Select another image",
         );
       }
-      print("recognizedText: ${recognizedText!.text}");
+      commonPrint(value: "recognizedText: ${recognizedText!.text}");
     } else {
       Get.rawSnackbar(
         title: "Please select image",
