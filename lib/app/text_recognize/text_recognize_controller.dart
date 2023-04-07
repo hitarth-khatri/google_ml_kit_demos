@@ -15,6 +15,8 @@ class TextRecognizeController extends GetxController {
   }
 
   XFile? galleryImage;
+  XFile? cameraImage;
+
   var imgPath = "".obs;
   Rx<File> imageFile = File("").obs;
 
@@ -61,7 +63,9 @@ class TextRecognizeController extends GetxController {
         source: ImageSource.gallery,
         maxWidth: 1800,
         maxHeight: 1800,
+        imageQuality: 50,
       );
+
       if (galleryImage != null) {
         detectedText.value = "";
 
@@ -70,6 +74,8 @@ class TextRecognizeController extends GetxController {
         imageFile.value = File(imgPath.value);
 
         inputImage.value = InputImage.fromFilePath(imgPath.value);
+      } else {
+        print("image null");
       }
     } else if (status.isPermanentlyDenied) {
       print("Permission Denied");

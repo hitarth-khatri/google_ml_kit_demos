@@ -52,7 +52,7 @@ class TextRecognizeScreen extends GetView<TextRecognizeController> {
         /// upload image button
         floatingActionButton: FloatingActionButton(
           onPressed: () => controller.selectImage(),
-          child: AppIcons.photoIcon,
+          child: AppIcons.galleryIcon,
         ),
 
         /// recognize text button

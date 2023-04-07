@@ -15,7 +15,16 @@ ThemeData appThemeData({BuildContext? context}) {
     /// filled button theme
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        minimumSize: const Size.fromHeight(50),
+        shape: RoundedRectangleBorder(
+          borderRadius: CommonWidgets.circularBorder(radius: 10),
+        ),
+      ),
+    ),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.yellow[200],
+        minimumSize: const Size.fromRadius(20),
         shape: RoundedRectangleBorder(
           borderRadius: CommonWidgets.circularBorder(radius: 10),
         ),
