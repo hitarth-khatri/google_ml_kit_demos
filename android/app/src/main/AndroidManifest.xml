@@ -6,18 +6,24 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- Provide required visibility configuration for API level 30 and above -->
-    <queries>
-        <!-- Place inside the <queries> element. -->
-        <intent>
-            <action android:name="android.media.browse.MediaBrowserService" />
-        </intent>
-    </queries>
+    <!-- <queries>
+         &lt;!&ndash; Place inside the <queries> element. &ndash;&gt;
+         <intent>
+             <action android:name="android.media.browse.MediaBrowserService" />
+         </intent>
+
+         <intent>
+             <action android:name="android.intent.action.VIEW" />
+             <data android:scheme="http" />
+         </intent>
+     </queries>-->
 
 
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="google_ml_kit_demos">
+        android:label="google_ml_kit_demos"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

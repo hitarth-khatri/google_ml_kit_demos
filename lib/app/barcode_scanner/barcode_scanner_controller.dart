@@ -119,7 +119,7 @@ class BarcodeScannerController extends GetxController {
   /// launch barcode url
   Future<void> openUrl() async {
     try {
-      await launchUrl(barcodeUrl.value, mode: LaunchMode.externalApplication);
+      await launchUrl(barcodeUrl.value);
       commonPrint(value: "url launched");
     } catch (e) {
       Get.rawSnackbar(
