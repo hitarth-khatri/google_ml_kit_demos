@@ -2,7 +2,11 @@
 
 ML kit demos
 
-## Text Recognize from image
+# From gallery and camera image
+
+## Text Recognize
 
 ## Barcode Scanner
+
+## Face count detection
 

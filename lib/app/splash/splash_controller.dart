@@ -46,8 +46,8 @@ class SplashController extends GetxController {
     });
   }
 
+  /// set shortcut
   void initializeShortcut() {
-    /// set shortcut
     quickActions.setShortcutItems(
       <ShortcutItem>[
         /// barcode
