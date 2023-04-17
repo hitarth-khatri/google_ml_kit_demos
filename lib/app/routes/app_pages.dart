@@ -4,12 +4,21 @@ import 'package:google_ml_kit_demos/app/barcode_scanner/barcode_scanner_screen.d
 import 'package:google_ml_kit_demos/app/face_detection/face_detection_binding.dart';
 import 'package:google_ml_kit_demos/app/face_detection/face_detection_screen.dart';
 import 'package:google_ml_kit_demos/app/home/home_screen.dart';
+import 'package:google_ml_kit_demos/app/splash/splash_binding.dart';
+import '../splash/splash_screen.dart';
 import '../text_recognize/text_recognize_binding.dart';
 import '../text_recognize/text_recognize_screen.dart';
 import 'app_routes.dart';
 
 class AppPages {
   static final List<GetPage> pages = [
+    /// splash screen
+    GetPage(
+      name: Routes.routeSplash,
+      page: () => const SplashScreen(),
+      binding: SplashBinding(),
+    ),
+
     /// home screen
     GetPage(
       name: Routes.routeHome,

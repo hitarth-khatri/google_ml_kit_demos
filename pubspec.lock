@@ -156,10 +156,10 @@ packages:
     dependency: "direct main"
     description:
       name: image_picker
-      sha256: cb25f04595a88450970dbe727243ba8cd21b6f7e0d7d1fc5b789fc6f52e95494
+      sha256: "8b0efbf350ba4f2be1531d629396a994983d0c02f4a82a128aed84d954b90cfa"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.7+1"
+    version: "0.8.7+2"
   image_picker_android:
     dependency: transitive
     description:
@@ -288,6 +288,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  quick_actions:
+    dependency: "direct main"
+    description:
+      name: quick_actions
+      sha256: dd675e83197391bd0a67c92f97747ddbc610b374846816994057272388e92de7
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
+  quick_actions_android:
+    dependency: transitive
+    description:
+      name: quick_actions_android
+      sha256: da0981160b59bf03ff912303d955e90545d6d12010149385127455e08c8b59b1
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
+  quick_actions_ios:
+    dependency: transitive
+    description:
+      name: quick_actions_ios
+      sha256: "20b9a3f41fc9ea7a7cad41abff2e79d2bce90555fc216e4e68d98fb260a2c776"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
+  quick_actions_platform_interface:
+    dependency: transitive
+    description:
+      name: quick_actions_platform_interface
+      sha256: "2985e12b5fecb5715a35cc0a3b2127b4391e1969e62bd0a4a721b4de21d5fedb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
   sky_engine:
     dependency: transitive
     description: flutter

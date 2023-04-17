@@ -26,43 +26,47 @@ class BarcodeScannerController extends GetxController {
   Future<void> selectImage({
     bool isCamera = false,
   }) async {
-    PermissionStatus? status;
+    try {
+      PermissionStatus? status;
 
-    defaultTargetPlatform == TargetPlatform.iOS
-        ? status = await Permission.photos.request()
-        : status = await Permission.storage.request();
+      defaultTargetPlatform == TargetPlatform.iOS
+              ? status = await Permission.photos.request()
+              : status = await Permission.storage.request();
 
-    if (status.isGranted) {
-      commonPrint(value: "Permission Granted");
+      if (status.isGranted) {
+            commonPrint(value: "Permission Granted");
 
-      galleryImage = await ImagePicker().pickImage(
-        source: isCamera ? ImageSource.camera : ImageSource.gallery,
-        maxWidth: 1800,
-        maxHeight: 1800,
-        imageQuality: 50,
-      );
+            galleryImage = await ImagePicker().pickImage(
+              source: isCamera ? ImageSource.camera : ImageSource.gallery,
+              maxWidth: 1800,
+              maxHeight: 1800,
+              imageQuality: 50,
+            );
 
-      if (galleryImage != null) {
-        barcodeUrl.value = Uri.parse("");
+            if (galleryImage != null) {
+              barcodeUrl.value = Uri.parse("");
 
-        imgPath.value = galleryImage!.path;
+              imgPath.value = galleryImage!.path;
 
-        imageFile.value = File(imgPath.value);
+              imageFile.value = File(imgPath.value);
 
-        // process barcode
-        await processBarcode();
-      } else {
-        commonPrint(value: "image null");
-      }
-    } else if (status.isPermanentlyDenied) {
-      commonPrint(value: "Permission Denied");
-      Get.defaultDialog(
-        middleText: "Permission denied",
-        confirm: OutlinedButton(
-          onPressed: () => openAppSettings(),
-          child: const Text("open setting"),
-        ),
-      );
+              // process barcode
+              await processBarcode();
+            } else {
+              commonPrint(value: "image null");
+            }
+          } else if (status.isPermanentlyDenied) {
+            commonPrint(value: "Permission Denied");
+            Get.defaultDialog(
+              middleText: "Permission denied",
+              confirm: OutlinedButton(
+                onPressed: () => openAppSettings(),
+                child: const Text("open setting"),
+              ),
+            );
+          }
+    } catch (e) {
+      print("camera error: $e");
     }
   }
 
