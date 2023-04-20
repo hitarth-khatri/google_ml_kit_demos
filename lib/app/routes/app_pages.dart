@@ -4,7 +4,10 @@ import 'package:google_ml_kit_demos/app/barcode_scanner/barcode_scanner_screen.d
 import 'package:google_ml_kit_demos/app/face_detection/face_detection_binding.dart';
 import 'package:google_ml_kit_demos/app/face_detection/face_detection_screen.dart';
 import 'package:google_ml_kit_demos/app/home/home_screen.dart';
+import 'package:google_ml_kit_demos/app/pdf/components/app_pdf_view.dart';
+import 'package:google_ml_kit_demos/app/pdf/pdf_screen.dart';
 import 'package:google_ml_kit_demos/app/splash/splash_binding.dart';
+import '../pdf/pdf_binding.dart';
 import '../splash/splash_screen.dart';
 import '../text_recognize/text_recognize_binding.dart';
 import '../text_recognize/text_recognize_screen.dart';
@@ -44,6 +47,19 @@ class AppPages {
       name: Routes.routeFaceDetection,
       page: () => const FaceDetectionScreen(),
       binding: FaceDetectionBinding(),
+    ),
+
+    /// pdf screen
+    GetPage(
+      name: Routes.routePdf,
+      page: () => const PdfScreen(),
+      binding: PdfBinding(),
+    ),
+
+    /// app pdf view
+    GetPage(
+      name: Routes.routeAppPdfView,
+      page: () => const AppPdfView(),
     ),
   ];
 }

@@ -40,6 +40,9 @@ class SplashController extends GetxController {
         case Routes.routeFaceDetection:
           Get.offNamed(Routes.routeFaceDetection);
           break;
+        case Routes.routePdf:
+          Get.offNamed(Routes.routePdf);
+          break;
         default:
           Get.offNamed(Routes.routeHome);
       }
@@ -66,6 +69,12 @@ class SplashController extends GetxController {
         const ShortcutItem(
           type: Routes.routeFaceDetection,
           localizedTitle: AppStrings.faceDetection,
+        ),
+
+        /// pdf viewer
+        const ShortcutItem(
+          type: Routes.routePdf,
+          localizedTitle: AppStrings.pdfViewer,
         ),
       ],
     );

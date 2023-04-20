@@ -10,6 +10,7 @@ ThemeData appThemeData({BuildContext? context}) {
     /// list tile theme
     listTileTheme: Theme.of(context!).listTileTheme.copyWith(
           tileColor: Colors.blueGrey[100],
+          textColor: Colors.indigo[900],
         ),
 
     /// filled button theme

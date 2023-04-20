@@ -32,6 +32,12 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () => Get.toNamed(Routes.routeFaceDetection),
                 child: const Text(AppStrings.faceDetection),
               ).paddingSymmetric(vertical: 20),
+
+              /// pdf screen
+              ElevatedButton(
+                onPressed: () => Get.toNamed(Routes.routePdf),
+                child: const Text(AppStrings.pdfViewer),
+              ).paddingSymmetric(vertical: 20),
             ],
           ),
         ),
