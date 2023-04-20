@@ -18,6 +18,7 @@ class AppPdfView extends GetView<PdfController> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(pdfName),
+          titleSpacing: 10,
           actions: [
             /// share button
             IconButton(

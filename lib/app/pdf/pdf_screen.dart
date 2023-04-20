@@ -22,11 +22,11 @@ class PdfScreen extends GetView<PdfController> {
           children: [
             /// pdf name
             Obx(
-              () => controller.platformPdfFileList.isEmpty
+              () => controller.selectedFileList.isEmpty
                   ? const Center(child: Text(AppStrings.pickPdf))
                   : ListView(
                       shrinkWrap: true,
-                      children: controller.platformPdfFileList.map(
+                      children: controller.selectedFileList.map(
                         (PlatformFile platformFile) {
                           return ListTile(
                             onTap: () => Get.toNamed(
@@ -57,11 +57,11 @@ class PdfScreen extends GetView<PdfController> {
         /// share button
 
         floatingActionButton: Obx(
-          () => controller.platformPdfFileList.isEmpty
+          () => controller.selectedFileList.isEmpty
               ? Container()
               : FloatingActionButton(
                   onPressed: () {
-                    controller.sharePdf(pdfXFile: controller.selectedPdfXFile);
+                    controller.sharePdf(pdfXFile: controller.selectedXFileList);
                   },
                   child: AppIcons.shareIcon,
                 ),

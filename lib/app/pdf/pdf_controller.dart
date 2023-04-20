@@ -9,23 +9,26 @@ class PdfController extends GetxController {
     super.onClose();
   }
 
-  RxList<PlatformFile> platformPdfFileList = <PlatformFile>[].obs;
-  List<XFile> selectedPdfXFile = <XFile>[].obs;
+  RxList<PlatformFile> selectedFileList = <PlatformFile>[].obs;
+  List<XFile> selectedXFileList = <XFile>[].obs;
 
   /// pick pdf
   Future<void> pickPdf() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ["pdf"],
+      allowedExtensions: [
+        "pdf",
+        "PDF",
+      ],
       allowMultiple: true,
     );
 
     if (result != null) {
-      platformPdfFileList.addAll(result.files);
+      selectedFileList.addAll(result.files);
 
-      for (var selectedXFile in platformPdfFileList) {
-        selectedPdfXFile.add(
-          XFile(selectedXFile.path!),
+      for (var selectedFile in selectedFileList) {
+        selectedXFileList.add(
+          XFile(selectedFile.path!),
         );
       }
     }

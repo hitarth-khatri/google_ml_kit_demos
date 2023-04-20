@@ -8,12 +8,16 @@ import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../common/enums/loading_status.dart';
+
 class TextRecognizeController extends GetxController {
   @override
   void onClose() {
     textRecognizer.close();
     super.onClose();
   }
+
+  Rx<LoadStatus> loadStatus = LoadStatus.initial.obs;
 
   XFile? galleryImage;
   XFile? cameraImage;
@@ -74,6 +78,7 @@ class TextRecognizeController extends GetxController {
 
   /// recognize text
   Future<void> recognizeText() async {
+    loadStatus.value = LoadStatus.loading;
     inputImage.value = InputImage.fromFilePath(imgPath.value);
 
     if (imgPath.value != "") {
@@ -92,5 +97,7 @@ class TextRecognizeController extends GetxController {
         message: "Must select image to recognize text",
       );
     }
+
+    loadStatus.value = LoadStatus.success;
   }
 }

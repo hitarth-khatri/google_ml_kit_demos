@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_ml_kit_demos/app/text_recognize/components/pick_image_button.dart';
+import 'package:google_ml_kit_demos/common/enums/loading_status.dart';
 import 'package:google_ml_kit_demos/common/widgets/common_widgets.dart';
 
 import '../../common/constants/constants.dart';
@@ -34,20 +35,22 @@ class TextRecognizeScreen extends GetView<TextRecognizeController> {
                             height: AppSize.imgHeight,
                             width: AppSize.imgWidth,
                           ),
-                        )
+                        ).paddingSymmetric(vertical: 8)
                       : const Text(AppStrings.pickImage),
                 ),
 
                 /// detected text
                 Obx(
-                  () => controller.detectedText.value != ""
-                      ? ListTile(
-                          title: const Text(AppStrings.detectedText),
-                          subtitle: SelectableText(
-                            controller.detectedText.value,
-                          ),
-                        ).paddingAll(8)
-                      : Container(),
+                  () => controller.loadStatus.value == LoadStatus.initial
+                      ? Container()
+                      : controller.loadStatus.value == LoadStatus.loading
+                          ? const Center(child: CircularProgressIndicator())
+                          : ListTile(
+                              title: const Text(AppStrings.detectedText),
+                              subtitle: SelectableText(
+                                controller.detectedText.value,
+                              ),
+                            ).paddingAll(8),
                 ),
               ],
             ),
