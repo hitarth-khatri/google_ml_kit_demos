@@ -21,6 +21,7 @@ class BarcodeScannerController extends GetxController {
 
   final Rx<Uri> barcodeUrl = Uri.parse("").obs;
   final RxString barcodeWifi = "".obs;
+  final RxString defaultText = "".obs;
 
   /// select image
   Future<void> selectImage({
@@ -104,11 +105,8 @@ class BarcodeScannerController extends GetxController {
             break;
 
           default:
-            commonPrint(value: "default barcoded");
-            Get.rawSnackbar(
-              title: "No barcode detected",
-              message: "Pick another image",
-            );
+            defaultText.value = displayValue!;
+            commonPrint(value: "default barcoded $displayValue, $rawValue, $barcodeType");
             break;
         }
       }

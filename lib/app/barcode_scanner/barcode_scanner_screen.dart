@@ -73,6 +73,18 @@ class BarcodeScannerScreen extends GetView<BarcodeScannerController> {
                         ).paddingAll(8)
                       : Container(),
                 ),
+
+                /// default type qr code
+                Obx(
+                  () => controller.defaultText.value != ""
+                      ? ListTile(
+                          title: const Text(AppStrings.qrDetails),
+                          subtitle: SelectableText(
+                            controller.defaultText.value,
+                          ),
+                        ).paddingAll(8)
+                      : Container(),
+                )
               ],
             ),
           ).paddingAll(8),

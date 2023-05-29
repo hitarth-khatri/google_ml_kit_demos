@@ -16,6 +16,7 @@ class AppStrings {
 
   static const String openLink = "Open link";
   static const String wifiDetails = "Wifi details";
+  static const String qrDetails = "QR Details";
 
   static const String pdfViewer = "PDF Viewer";
   static const String pickPdf = "Pick PDF";
